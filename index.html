@@ -68,7 +68,7 @@
 		</script>
 		
 		<script type="text/x-template" id="order-template">
-			<router-link class="card card--small" :to="{ name: 'view', params: { contentType: contentType, id: index }}" v-if="typeof cancelledData[index] === 'undefined'">
+			<router-link class="card card--small" :to="{ name: 'view', params: { contentType: contentType, id: index }}" v-if="!cancelledData[index]">
 				<div class="card-top">
 					<div class="card-status" v-if="order.visible">
 						<svg class="svg-icon"><use xlink:href="#lime"></use></svg > Просмотрено

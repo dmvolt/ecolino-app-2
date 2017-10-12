@@ -74,7 +74,7 @@
 						<svg class="svg-icon"><use xlink:href="#lime"></use></svg > Просмотрено
 					</div>
 					<div class="card-status" v-else>
-						<svg class="svg-icon"><use xlink:href="#ex"></use></svg > Новое
+						<svg class="svg-icon"><use xlink:href="#ex"></use></svg > {{ order.id }} Новое
 					</div>
 					<svg class="svg-icon"><use xlink:href="#calendar"></use></svg > <time datetime="2016-1-1">{{ order.date_service }}</time>
 					<svg class="svg-icon"><use xlink:href="#clock"></use></svg > <time datetime="2016-1-1">{{ order.time_service }}</time>
@@ -244,7 +244,6 @@
 		
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/vendor/vue.min.js"></script>
-		<script type="text/javascript" src="js/vendor/vuex.min.js"></script>
 		<script type="text/javascript" src="js/vendor/vue-router.min.js"></script>
 		<script type="text/javascript" src="js/vendor/axios.min.js"></script>
 		<script type="text/javascript" src="js/vendor/vue-axios.min.js"></script>

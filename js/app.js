@@ -164,29 +164,38 @@ var app = {
 					headerTitle: this.$root.headerTitle + 'Home',
 					endpoint: this.$root.endpointOrder,
 					cancelledData: {},
+					orderAllLists: {},
 					userId: 0
 				};
 			},
 			computed: {
 				newOrders: function newOrders() {
-					return this.$store.getters.getAllOrders.orders_new;
+					localStorage.setItem('currentDataNew', JSON.stringify(this.orderAllLists.orders_new));
+					return this.orderAllLists.orders_new;
 				},
 				myOrders: function myOrders() {
-					return this.$store.getters.getAllOrders.orders_my;
+					localStorage.setItem('currentDataMy', JSON.stringify(this.orderAllLists.orders_my));
+					return this.orderAllLists.orders_my;
 				}
 			},
 			methods: {
 				fetchOrders: function fetchOrders() {
-					var userId = this.userId;
-					var endpoint = this.endpoint;
+					
+					var _this555 = this;
 					
 					this.refreshLoading = true;
 					
-					this.$store.dispatch('fetchAllOrders', { userId: userId, endpoint: endpoint });
-					
-					this.refreshLoading = false;
+					axios.get(this.endpoint + '?id_user=' + this.userId).then(function (data) {
+						
+						_this555.refreshLoading = false;
+						
+						if (data.data) {
+							_this555.orderAllLists = data.data;
+						}
+					}).catch(function (err) {
+						return navigator.notification.alert('Ощибка соединения с сервером!', function () {}, 'Ecolino', 'OK');
+					});
 				},
-
 				logoutUser: function logoutUser() {
 
 					if (localStorage.user) {
@@ -215,6 +224,7 @@ var app = {
 			created: function created() {
 				if (localStorage.user) {
 					this.userId = localStorage.user;
+					
 					this.fetchOrders();
 					
 					if(localStorage.cancelled){
@@ -244,15 +254,23 @@ var app = {
 					pageData: false
 				};
 			},
-
 			computed: {
 				getPage: function getPage() {
-					if (this.$route.params.contentType == 'new' && this.$store.getters.getAllOrders.orders_new[this.$route.params.id]) {
+					if (this.$route.params.contentType == 'new' && localStorage.currentDataNew) {
+						
+						var currentDataNew = JSON.parse(localStorage.getItem('currentDataNew'));
+						
+						if(currentDataNew){
+							this.pageData = currentDataNew[this.$route.params.id];
+						}
 
-						this.pageData = this.$store.getters.getAllOrders.orders_new[this.$route.params.id];
 					} else if (this.$route.params.contentType == 'my' && this.$store.getters.getAllOrders.orders_my[this.$route.params.id]) {
 
-						this.pageData = this.$store.getters.getAllOrders.orders_my[this.$route.params.id];
+						var currentDataMy = JSON.parse(localStorage.getItem('currentDataMy'));
+						
+						if(currentDataMy){
+							this.pageData = currentDataMy[this.$route.params.id];
+						}
 					}
 				}
 			},
@@ -309,7 +327,7 @@ var app = {
 							_this21.$router.push('/');
 							
 							// hide loader
-							//Eco.preFailLoader = false;
+							//_this21.preFailLoader = false;
 					
 						}
 					}, 'Ecolino', ['Да', 'Нет']);
@@ -411,42 +429,6 @@ var app = {
 			}]
 		});
 
-		// Stores
-		var FETCH_ORDERS = 'FETCH_ORDERS';
-
-		var store = new Vuex.Store({
-			state: {
-				allOrders: []
-			},
-			getters: {
-				getAllOrders: function getAllOrders(state) {
-					return state.allOrders;
-				}
-			},
-			mutations: _defineProperty({}, FETCH_ORDERS, function (state, _ref) {
-				var orderAllLists = _ref.orderAllLists;
-
-				state.allOrders = orderAllLists;
-			}),
-			actions: {
-				fetchAllOrders: function fetchAllOrders(_ref2, _ref3) {
-					var commit = _ref2.commit;
-					var userId = _ref3.userId,
-					    endpoint = _ref3.endpoint;
-
-
-					axios.get(endpoint + '?id_user=' + userId).then(function (data) {
-						if (data.data) {
-							var orderAllLists = data.data;
-							commit('FETCH_ORDERS', { orderAllLists: orderAllLists });
-						}
-					}).catch(function (err) {
-						return navigator.notification.alert('Ощибка соединения с сервером!', function () {}, 'Ecolino', 'OK');
-					});
-				}
-			}
-		});
-
 		var vm = new Vue({
 			data: {
 				headerTitle: 'Ecolino',
@@ -455,8 +437,7 @@ var app = {
 				endpointAction: 'https://ecolino.ru/api/order',
 				userId: 0
 			},
-			router: router,
-			store: store
+			router: router
 		}).$mount('#app');
 	}
 };

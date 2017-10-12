@@ -51,7 +51,7 @@ var app = {
 		// Orders component 
 		var order = Vue.component('order', {
 			template: '#order-template',
-			props: ['order', 'index', 'content-type']
+			props: ['order', 'index', 'content-type', 'cancelled-data']
 		});
 		
 		// Setting component 
@@ -163,6 +163,7 @@ var app = {
 					refreshLoading: false,
 					headerTitle: this.$root.headerTitle + 'Home',
 					endpoint: this.$root.endpointOrder,
+					cancelledData: {},
 					userId: 0
 				};
 			},
@@ -215,6 +216,11 @@ var app = {
 				if (localStorage.user) {
 					this.userId = localStorage.user;
 					this.fetchOrders();
+					
+					if(localStorage.cancelled){
+						this.cancelledData = JSON.parse(localStorage.getItem('cancelled'));
+					}
+					
 				} else {
 					this.$router.push('/login');
 				}
@@ -287,7 +293,18 @@ var app = {
 					
 							// show loader
 							//_this21.preFailLoader = true;
-		  
+							if(localStorage.cancelled){
+								
+								var cancelled = JSON.parse(localStorage.getItem('cancelled'));
+								cancelled[_this21.$route.params.id] = _this21.$route.params.id;
+								localStorage.setItem('cancelled', JSON.stringify(cancelled));
+								
+							} else {
+								
+								var cancelled[_this21.$route.params.id] = _this21.$route.params.id;
+								localStorage.setItem('cancelled', JSON.stringify(cancelled));
+							}
+							
 							_this21.$router.push('/');
 							
 							// hide loader

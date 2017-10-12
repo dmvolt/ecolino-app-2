@@ -68,7 +68,7 @@
 		</script>
 		
 		<script type="text/x-template" id="order-template">
-			<router-link class="card card--small" :to="{ name: 'view', params: { contentType: contentType, id: index }}">
+			<router-link class="card card--small" :to="{ name: 'view', params: { contentType: contentType, id: index }}" v-if="typeof cancelledData[index] === 'undefined'">
 				<div class="card-top">
 					<div class="card-status" v-if="order.visible">
 						<svg class="svg-icon"><use xlink:href="#lime"></use></svg > Просмотрено
@@ -143,14 +143,14 @@
 				<div v-if="isNew">
 				  <div v-if="!newOrders"> Новых заказов нет</div>
 				  <div v-else>
-					<order v-for="(index, key) in newOrders" content-type="new" :order="index" :index="key" :key="key"> </order>
+					<order v-for="(index, key) in newOrders" content-type="new" :cancelled-data="cancelledData" :order="index" :index="key" :key="key"> </order>
 				  </div>
 				</div>
 
 				<div v-if="isMy">
 				  <div v-if="!myOrders"> Ваших заказов нет</div>
 				  <div v-else>
-					<order v-for="(index, key) in myOrders" content-type="my" :order="index" :index="key" :key="key"> </order>
+					<order v-for="(index, key) in myOrders" content-type="my" :cancelled-data="cancelledData" :order="index" :index="key" :key="key"> </order>
 				  </div>
 				</div>
 			</div>

@@ -1,0 +1,144 @@
+.section {
+  padding-top: 0;
+}
+
+.container {
+  max-width: 320px;
+}
+
+.field.has-addons .control {
+  flex-grow: 1;
+}
+
+.field.has-addons .control .button {
+  width: 100%;
+}
+
+.svg-icon {
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+  margin: -0.125em 0.125em 0 0;
+  fill: currentColor;
+}
+
+.tabs.is-fullwidth li {
+  width: 50%;
+}
+
+.button {
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.button .svg-icon {
+  margin-right: 0.5rem;
+}
+
+.button.is-small {
+  border-radius: 5px;
+  padding: 1rem 0.5rem;
+}
+
+.button.is-primary {
+  background-color: hsl(172, 89%, 22%);
+}
+
+.button.is-primary:hover {
+  background-color: hsl(172, 89%, 18%);
+}
+
+.button.is-primary:active {
+  background-color: hsl(172, 89%, 14%);
+}
+
+.button.is-danger {
+  background-color: hsl(15, 97%, 34%);
+}
+
+.button.is-danger:hover {
+  background-color: hsl(15, 97%, 30%);
+}
+
+.button.is-danger:active {
+  background-color: hsl(15, 97%, 26%);
+}
+
+.button.is-info {
+  background-color: hsl(194, 77%, 9%);
+}
+
+.button.is-info:hover {
+  background-color: hsl(194, 77%, 5%);
+}
+
+.button.is-info:active {
+  background-color: hsl(194, 77%, 1%);
+}
+
+.tabs.is-toggle li.is-active a {
+  background-color: hsl(144, 26%, 58%);
+  border-color: hsl(144, 26%, 58%);
+  border-bottom: 5px solid hsl(144, 26%, 58%);
+  border-top: 5px solid hsl(144, 26%, 58%);
+}
+
+.card {
+  display: block;
+  border: 1px solid #ccd0d9;
+  margin-bottom: 1rem;
+}
+
+.card--small {
+  color: #fff;
+  background-color: hsl(15, 75%, 60%);
+}
+
+.card--small:hover {
+  color: #fff;
+  background-color: hsl(15, 75%, 56%);
+}
+
+.card--small:active {
+  background-color: hsl(15, 75%, 52%);
+}
+
+.card--small:visited {
+  color: #fff;
+  background-color: hsl(144, 26%, 58%);
+}
+
+.card--small:visited:hover {
+  color: #fff;
+  background-color: hsl(144, 26%, 54%);
+}
+
+.card--small:visited:active {
+  background-color: hsl(144, 26%, 50%);
+}
+
+.card-top {
+  display: flex;
+  padding: 0.5rem;
+}
+
+.card-status {
+  flex-grow: 1;
+}
+
+.card-footer,
+.card-line {
+  border-top: 1px solid #ccd0d9;
+  padding: 0.5rem;
+}
+
+.card-footer--buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-work {
+  font-size: 0.75em;
+  padding: 0 0 0 9rem
+}

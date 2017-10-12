@@ -264,7 +264,7 @@ var app = {
 							this.pageData = currentDataNew[this.$route.params.id];
 						}
 
-					} else if (this.$route.params.contentType == 'my' && this.$store.getters.getAllOrders.orders_my[this.$route.params.id]) {
+					} else if (this.$route.params.contentType == 'my' && localStorage.currentDataMy) {
 
 						var currentDataMy = JSON.parse(localStorage.getItem('currentDataMy'));
 						

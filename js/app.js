@@ -18,8 +18,8 @@ var app = {
 
 	// Update DOM on a Received Event
 	receivedEvent: function receivedEvent(id) {
-		this.vueInit();
-
+		
+		// Push notification initialize
 		if(localStorage.isPushNotification && localStorage.isPushNotification == 'push'){
 			// Enable to debug issues.
 			// window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
@@ -30,6 +30,9 @@ var app = {
 
 			window.plugins.OneSignal.startInit("d8e57713-9364-4af7-a2dd-306e62d88e1d").handleNotificationOpened(notificationOpenedCallback).endInit();
 		}
+		
+		// Vue initialize
+		this.vueInit();
 	},
 	// Vue initialize
 	vueInit: function vueInit() {
@@ -61,13 +64,35 @@ var app = {
 					isPushNotification: true
 				}
 			},
+			methods: {
+				// delete all push notification
+				deletePushNotification: function deletePushNotification() {
+					navigator.notification.confirm('Хотите удалить все уведомления?', function (buttonIndex) {
+						if(buttonIndex == 1){
+							window.plugins.OneSignal.clearOneSignalNotifications();
+						}
+					}, 'Ecolino', ['Да', 'Нет']);
+				},
+				// clear memory
+				clearMemory: function clearMemory() {
+					navigator.notification.confirm('Хотите очистить память?', function (buttonIndex) {
+						if(buttonIndex == 1){
+							localStorage.clear();
+						}
+					}, 'Ecolino', ['Да', 'Нет']);
+				}
+			},
 			watch: {
 				// эта функция запускается при любом изменении вопроса
 				isPushNotification: function () {
 					if(this.isPushNotification) {
 						localStorage.isPushNotification = 'push';
+						// Push notification on
+						window.plugins.OneSignal.setSubscription(true);
 					} else {
 						localStorage.isPushNotification = 'nopush';
+						// Push notification off
+						window.plugins.OneSignal.setSubscription(false);
 					}
 				}
 			},
@@ -93,7 +118,6 @@ var app = {
 					endpoint: this.$root.endpointLogin
 				};
 			},
-
 			methods: {
 				loginUser: function loginUser() {
 					var _this = this;

@@ -37,7 +37,7 @@
 					</a>
 					<a @click="$router.go(-1)" class="button is-small" v-else-if="page == 'view' || page == 'setting'">
 						<span class="icon is-small">
-						  <i class="fa fa-sign-out"></i>
+						  <i class="fa fa-arrow-left"></i>
 						</span>
 						<span>Назад</span>
 					</a>
@@ -96,6 +96,12 @@
 				  <span v-if="isPushNotification"> включены</span>
 				  <span v-else> отключены</span>
 				</label>
+				<p>
+					<a class="button is-small is-primary" @click="deletePushNotification">Удалить все уведомления</a>
+				</p>
+				<p>
+					<a class="button is-small is-primary" @click="clearMemory">Очистить память</a>
+				</p>
 			</div>
 		</script>
 		

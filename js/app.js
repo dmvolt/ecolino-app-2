@@ -290,18 +290,19 @@ var app = {
 					
 					navigator.notification.confirm('Вы точно хотите убрать этот заказ из списка доступных?', function (buttonIndex) {
 						if(buttonIndex == 1){
-					
+							
+							var cancelled = [];
 							// show loader
 							//_this21.preFailLoader = true;
 							if(localStorage.cancelled){
 								
-								var cancelled = JSON.parse(localStorage.getItem('cancelled'));
+								cancelled = JSON.parse(localStorage.getItem('cancelled'));
 								cancelled[_this21.$route.params.id] = _this21.$route.params.id;
 								localStorage.setItem('cancelled', JSON.stringify(cancelled));
 								
 							} else {
-								
-								var cancelled[_this21.$route.params.id] = _this21.$route.params.id;
+
+								cancelled[_this21.$route.params.id] = _this21.$route.params.id;
 								localStorage.setItem('cancelled', JSON.stringify(cancelled));
 							}
 							

@@ -91,17 +91,16 @@
 				<top page="setting"></top>
 				<logo></logo>
 				<h2>Настройки приложения</h2>
+				<hr>
 				<input type="checkbox" id="checkbox" v-model="isPushNotification">
 				<label for="checkbox">push уведомления
 				  <span v-if="isPushNotification"> включены</span>
 				  <span v-else> отключены</span>
 				</label>
-				<p>
-					<a class="button is-small is-primary" @click="deletePushNotification">Удалить все уведомления</a>
-				</p>
-				<p>
-					<a class="button is-small is-primary" @click="clearMemory">Очистить память</a>
-				</p>
+				<hr>
+				<a class="button is-small is-primary" @click="deletePushNotification">Удалить все уведомления</a>
+				<hr>
+				<a class="button is-small is-primary" @click="clearMemory">Очистить память</a>
 			</div>
 		</script>
 		

@@ -71,10 +71,10 @@
 			<router-link class="card card--small" :to="{ name: 'view', params: { contentType: contentType, id: index }}" v-if="!cancelledData[index]">
 				<div class="card-top">
 					<div class="card-status" v-if="order.visible">
-						<svg class="svg-icon"><use xlink:href="#lime"></use></svg > Просмотрено
+						№ {{ order.id }}
 					</div>
 					<div class="card-status" v-else>
-						<svg class="svg-icon"><use xlink:href="#ex"></use></svg > {{ order.id }} Новое
+						№ {{ order.id }}
 					</div>
 					<svg class="svg-icon"><use xlink:href="#calendar"></use></svg > <time datetime="2016-1-1">{{ order.date_service }}</time>
 					<svg class="svg-icon"><use xlink:href="#clock"></use></svg > <time datetime="2016-1-1">{{ order.time_service }}</time>
@@ -164,10 +164,10 @@
 				<div class="card" v-if="pageData">
 				  <div class="card-top">
 					<div class="card-status" v-if="pageData.visible">
-					   <svg class="svg-icon"><use xlink:href="#lime"></use></svg > Просмотрено
+					   № {{ pageData.id }}
 					</div>
 					<div class="card-status" v-else>
-					  <svg class="svg-icon"><use xlink:href="#ex"></use></svg > Новое
+					  № {{ pageData.id }}
 					</div>
 					<svg class="svg-icon"><use xlink:href="#calendar"></use></svg > <time datetime="2016-1-1">{{ pageData.date_service }}</time>
 					<svg class="svg-icon"><use xlink:href="#clock"></use></svg > <time datetime="2016-1-1">{{ pageData.time_service }}</time>

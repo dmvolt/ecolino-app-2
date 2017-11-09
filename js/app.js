@@ -255,6 +255,7 @@ var app = {
 				};
 			},
 			computed: {
+				
 				getPage: function getPage() {
 					if (this.$route.params.contentType == 'new' && localStorage.currentDataNew) {
 						
